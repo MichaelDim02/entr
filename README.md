@@ -1,5 +1,5 @@
 # losr
-Entr is cuck-licensed bloat. Here's my rewrite of entr in shell
+Entr is cuck-licensed bloat. Here's my rewrite of entr in shell with no useless options. Seriously, what does `-a` even do?
 
 # Installation
 ```
