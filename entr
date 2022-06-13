@@ -1,0 +1,25 @@
+#!/bin/sh
+
+if [ "$#" -eq 0 ]; then
+	echo "$0: no arguments given" >&2
+	exit 1
+fi
+
+trigger_file=`cat`
+if ! [ -f "$trigger_file" ]; then
+	echo "$trigger_file: file doesn't exist" >&2
+	exit 1
+fi
+
+"$@"
+oldhash=$(cat "$trigger_file" | md5sum)
+for (( ; ; ))
+do
+	newhash=$(cat "$trigger_file" | md5sum)
+	if [ "$newhash" != "$oldhash" ]; then
+		newhash=$(cat "$trigger_file" | md5sum)
+		oldhash=$newhash
+		"$@"
+	fi
+	sleep .5
+done
